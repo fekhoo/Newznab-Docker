@@ -56,4 +56,4 @@ EXPOSE 80
 VOLUME /nzb
 WORKDIR /var/www/html/www/
 #kickoff Supervisor to start the functions
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
