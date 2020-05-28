@@ -4,7 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Add Variables SVN Password and user
 ENV nn_user=svnplus 
-ENV nn_pass=svnplus5
+ENV nn_pass=svnplu5
 ENV php_timezone=America/New_York 
 ENV path /:/var/www/html/www/
 
