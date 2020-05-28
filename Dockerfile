@@ -8,15 +8,12 @@ ENV nn_pass=svnplus5
 ENV php_timezone=America/New_York 
 ENV path /:/var/www/html/www/
 
-
 #Install required packages
 RUN apt-get update && apt-get -yq install ssh screen tmux apache2 php php-fpm php-pear php-gd php-mysql php-memcache php-curl \
 php-json php-mbstring unrar lame mediainfo subversion ffmpeg memcached 
 
-
 #Configer Apache
 ADD ./newznab.conf /etc/apache2/sites-available/newznab.conf
-
 
 # Creating Newznab Folders from SVN
 RUN mkdir /var/www/newznab/
@@ -29,22 +26,19 @@ chmod 777 /var/www/newznab/www  && \
 chmod 777 /var/www/newznab/www/install  && \
 chmod 777 /var/www/newznab/nzbfiles/ 
 
-#fix the config files for PHP
-RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php5/cli/php.ini  && \
-sed -i "s/memory_limit = -1/memory_limit = 1024M/" /etc/php5/cli/php.ini  && \
-echo "register_globals = Off" >> /etc/php5/cli/php.ini  && \
-echo "date.timezone =$php_timezone" >> /etc/php5/cli/php.ini  && \
-sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php5/apache2/php.ini  && \
-sed -i "s/memory_limit = -1/memory_limit = 1024M/" /etc/php5/apache2/php.ini  && \
-echo "register_globals = Off" >> /etc/php5/apache2/php.ini  && \
-echo "date.timezone =$php_timezone" >> /etc/php5/apache2/php.ini  && \
-sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php5/apache2/php.ini
+#Update a few defaults in the php.ini file
+RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini  && \
+echo "date.timezone =$php_timezone" >> /etc/php/7.4/fpm/php.ini  && \
 
-# Disable Default site and enable newznab site - Restart Apache here to confirm your newznab.conf is valid in case you changed it
+#Enable apache mod_rewrite, fpm and restart services
 RUN a2dissite 000-default.conf
 RUN a2ensite newznab
+RUN a2enmod proxy_fcgi setenvif
+RUN a2enconf php7.4-fpm
 RUN a2enmod rewrite
-RUN service apache2 restart
+RUN systemctl restart php7.4-fpm
+RUN systemctl restart apache2
+RUN systemctl restart mysql
 
 # add newznab config file - This needs to be edited
 ADD ./config.php /var/www/newznab/www/config.php
