@@ -1,5 +1,5 @@
 FROM ubuntu:latest 
-MAINTAINER 
+MAINTAINER fekhoo@gmail.com
 
 #Install required packages
 RUN apt update && apt upgrade -y 
