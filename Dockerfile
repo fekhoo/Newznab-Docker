@@ -1,5 +1,6 @@
 FROM ubuntu:latest 
 MAINTAINER fekhoo@gmail.com
+ARG DEBIAN_FRONTEND=noninteractive
 
 #Install required packages
 RUN apt-get update && apt-get -yq install ssh screen tmux apache2 php php-fpm php-pear php-gd php-mysql php-memcache php-curl \
