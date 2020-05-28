@@ -28,7 +28,7 @@ chmod 777 /var/www/newznab/nzbfiles/
 
 #Update a few defaults in the php.ini file
 RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini  && \
-echo "date.timezone =$php_timezone" >> /etc/php/7.4/fpm/php.ini  && \
+echo "date.timezone =$php_timezone" >> /etc/php/7.4/fpm/php.ini 
 
 #Enable apache mod_rewrite, fpm and restart services
 RUN a2dissite 000-default.conf
