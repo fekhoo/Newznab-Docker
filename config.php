@@ -8,7 +8,7 @@ define('DB_HOST', '10.35.103.127');
 define('DB_PORT', 3306);
 define('DB_USER', 'root');
 define('DB_PASSWORD','my-secret-pw');
-define('DB_NAME', 'newznab');
+define('DB_NAME', 'testneznab');
 define('DB_INNODB', true);
 define('DB_PCONNECT', true);
 define('DB_ERRORMODE', PDO::ERRMODE_SILENT);
