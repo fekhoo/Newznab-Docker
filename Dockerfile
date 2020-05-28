@@ -2,9 +2,10 @@ FROM ubuntu:latest
 MAINTAINER fekhoo@gmail.com
 
 #Install required packages
-RUN apt-get update && apt-get -yq install screen php5 php5-dev php-pear php5-gd php5-mysql php5-curl mysql-client-5.5 libmysqlclient-dev \
- 	apache2 subversion unrar-free lame python-software-properties mediainfo supervisor
-
+RUN apt-get update && apt-get upgrade -y 
+RUN apt-get install ssh screen apache2 php php-fpm -y 
+RUN apt-get install php-pear php-gd php-mysql php-memcache php-curl php-json php-mbstring unrar lame mediainfo subversion ffmpeg memcached -y
+RUN apt-get install mysql-client libmysqlclient-dev software-properties-common -y
  
 # Add Variables SVN Password and user
 ENV nn_user svnplus 
