@@ -2,10 +2,9 @@ FROM ubuntu:latest
 MAINTAINER fekhoo@gmail.com
 
 #Install required packages
-RUN apt update && apt upgrade -y 
-RUN apt install ssh screen apache2 php php-fpm -y 
-RUN apt install php-pear php-gd php-mysql php-memcache php-curl php-json php-mbstring unrar lame mediainfo subversion ffmpeg memcached -y
-RUN apt install mysql-client libmysqlclient-dev software-properties-common -y
+RUN apt-get update && apt-get -yq install screen php5 php5-dev php-pear php5-gd php5-mysql php5-curl mysql-client-5.5 libmysqlclient-dev \
+ 	apache2 subversion unrar-free lame python-software-properties mediainfo supervisor
+
  
 # Add Variables SVN Password and user
 ENV nn_user svnplus 
@@ -28,15 +27,20 @@ chmod 777 /var/www/newznab/www  && \
 chmod 777 /var/www/newznab/www/install  && \
 chmod 777 /var/www/newznab/nzbfiles/ 
 
-#Update a few defaults in the php.ini file
-RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.2/fpm/php.ini  && \
-echo "date.timezone =$php_timezone" >> /etc/php/7.2/fpm/php.ini  && \
+#fix the config files for PHP
+RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php5/cli/php.ini  && \
+sed -i "s/memory_limit = -1/memory_limit = 1024M/" /etc/php5/cli/php.ini  && \
+echo "register_globals = Off" >> /etc/php5/cli/php.ini  && \
+echo "date.timezone =$php_timezone" >> /etc/php5/cli/php.ini  && \
+sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php5/apache2/php.ini  && \
+sed -i "s/memory_limit = -1/memory_limit = 1024M/" /etc/php5/apache2/php.ini  && \
+echo "register_globals = Off" >> /etc/php5/apache2/php.ini  && \
+echo "date.timezone =$php_timezone" >> /etc/php5/apache2/php.ini  && \
+sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php5/apache2/php.ini
 
-#Enable apache mod_rewrite, fpm and restart services
+# Disable Default site and enable newznab site - Restart Apache here to confirm your newznab.conf is valid in case you changed it
 RUN a2dissite 000-default.conf
 RUN a2ensite newznab
-RUN a2enmod proxy_fcgi setenvif
-RUN a2enconf php7.2-fpm
 RUN a2enmod rewrite
 RUN service apache2 restart
 
