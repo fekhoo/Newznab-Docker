@@ -3,9 +3,9 @@ MAINTAINER
 
 #Install required packages
 RUN apt update && apt upgrade -y 
-apt install ssh screen apache2 php php-fpm -y 
-apt install php-pear php-gd php-mysql php-memcache php-curl php-json php-mbstring unrar lame mediainfo subversion ffmpeg memcached -y
-apt install mysql-client libmysqlclient-dev software-properties-common 
+RUN apt install ssh screen apache2 php php-fpm -y 
+RUN apt install php-pear php-gd php-mysql php-memcache php-curl php-json php-mbstring unrar lame mediainfo subversion ffmpeg memcached -y
+RUN apt install mysql-client libmysqlclient-dev software-properties-common -y
  
 # Add Variables SVN Password and user
 ENV nn_user svnplus 
