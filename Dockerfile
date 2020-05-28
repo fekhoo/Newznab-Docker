@@ -36,7 +36,7 @@ RUN a2ensite newznab
 RUN a2enmod proxy_fcgi setenvif
 RUN a2enconf php7.4-fpm
 RUN a2enmod rewrite
-RUN service apache2 reload
+RUN service apache2 restart
 
 # add newznab config file - This needs to be edited
 ADD ./config.php /var/www/newznab/www/config.php
