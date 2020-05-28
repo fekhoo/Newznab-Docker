@@ -1,20 +1,24 @@
 FROM ubuntu:latest 
 MAINTAINER 
 
-#install the Pre Reqs and Apache
-RUN apt-get update && apt-get -yq install php5 php5-dev php-pear php5-gd php5-mysql php5-curl mysql-client-5.5 libmysqlclient-dev \
- 	apache2 subversion unrar-free lame python-software-properties mediainfo supervisor
-
-# need to add your Newznab plus SVN Password and user here http://newznab4win.blogspot.com.au/2013/01/installing-newznab.html
-
-ENV nn_user user 
-ENV nn_pass password
-ENV php_timezone Australia/Sydney 
+#Install required packages
+RUN apt update && apt upgrade -y \
+apt install ssh screen apache2 php php-fpm -y \
+apt install php-pear php-gd php-mysql php-memcache php-curl php-json php-mbstring unrar lame mediainfo subversion ffmpeg memcached -y \
+apt install mysql-client libmysqlclient-dev software-properties-common \
+ 
+# Add Variables SVN Password and user
+ENV nn_user svnplus 
+ENV nn_pass svnplus5
+ENV php_timezone America/New_York 
 ENV path /:/var/www/html/www/
+
 # add the Config to Apache
 ADD ./newznab.conf /etc/apache2/sites-available/newznab.conf
+
+
+# Creating Newznab Folders from SVN
 RUN mkdir /var/www/newznab/
-# pull NNab plus from SVN - Note you need the username and password for Svn Above
 RUN svn co --username $nn_user --password $nn_pass svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab/
 RUN chmod 777 /var/www/newznab/www/lib/smarty/templates_c && \
 chmod 777 /var/www/newznab/www/covers/movies && \
