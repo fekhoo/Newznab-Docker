@@ -2,15 +2,17 @@ FROM ubuntu:latest
 MAINTAINER fekhoo@gmail.com
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Add Variables SVN Password and user
+ENV nn_user=svnplus 
+ENV nn_pass=svnplus5
+ENV php_timezone=America/New_York 
+ENV path /:/var/www/html/www/
+
+
 #Install required packages
 RUN apt-get update && apt-get -yq install ssh screen tmux apache2 php php-fpm php-pear php-gd php-mysql php-memcache php-curl \
 php-json php-mbstring unrar lame mediainfo subversion ffmpeg memcached 
 
-# Add Variables SVN Password and user
-ENV nn_user svnplus 
-ENV nn_pass svnplus5
-ENV php_timezone America/New_York 
-ENV path /:/var/www/html/www/
 
 #Configer Apache
 ADD ./newznab.conf /etc/apache2/sites-available/newznab.conf
