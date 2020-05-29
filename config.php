@@ -4,18 +4,18 @@
 // Config you must change - updated by installer.
 //=========================
 define('DB_TYPE', 'mysql');
-define('DB_HOST', '10.35.103.127');
+define('DB_HOST', 'localhost');
 define('DB_PORT', 3306);
 define('DB_USER', 'root');
 define('DB_PASSWORD','my-secret-pw');
-define('DB_NAME', 'testneznab');
+define('DB_NAME', 'newznab');
 define('DB_INNODB', true);
 define('DB_PCONNECT', true);
 define('DB_ERRORMODE', PDO::ERRMODE_SILENT);
 
-define('NNTP_USERNAME', 'fekhoo');
-define('NNTP_PASSWORD', 'fekhoo14');
-define('NNTP_SERVER', 'news.newsgroup.ninja');
+define('NNTP_USERNAME', 'nntp_user');
+define('NNTP_PASSWORD', 'nntp_password');
+define('NNTP_SERVER', 'nntp_server');
 define('NNTP_PORT', '563');
 define('NNTP_SSLENABLED', true);
 
