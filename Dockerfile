@@ -12,7 +12,7 @@ RUN apt-get -q update && \
     apt-get -qy dist-upgrade && \
     apt-get install -qy ssh screen tmux apache2 php php-fpm php-pear php-gd \
     php-mysql php-memcache php-curl php-json php-mbstring unrar lame mediainfo \
-    subversion ffmpeg memcached supervisor nano
+    subversion ffmpeg memcached supervisor nano git
 
 #Creating Newznab Folders from SVN
 RUN mkdir /var/www/newznab/ && \
