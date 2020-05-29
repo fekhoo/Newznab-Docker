@@ -23,7 +23,8 @@ RUN mkdir /var/www/newznab/ && \
     chmod 777 /var/www/newznab/www/covers/music  && \
     chmod 777 /var/www/newznab/www  && \
     chmod 777 /var/www/newznab/www/install  && \
-    chmod 777 /var/www/newznab/nzbfiles/ 
+    chmod 777 /var/www/newznab/nzbfiles/ && \
+    chmod 777 /var/www/newznab/www/covers/tv
 
 #Add newznab processing script
 ADD ./newznab.sh /newznab.sh
@@ -31,7 +32,17 @@ RUN chmod 755 /*.sh
 
 #Update a few defaults in the php.ini file
 RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini  && \
-echo "date.timezone =$TZ" >> /etc/php/7.4/fpm/php.ini 
+echo "date.timezone =$TZ" >> /etc/php/7.4/fpm/php.ini && \
+sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/cli/php.ini  && \
+sed -i "s/memory_limit = -1/memory_limit = 1024M/" /etc/php/7.4/cli/php.ini  && \
+echo "register_globals = Off" >> /etc/php/7.4/cli/php.ini  && \
+echo "date.timezone =$TZ" >> /etc/php/7.4/cli/php.ini  && \
+sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/apache2/php.ini  && \
+sed -i "s/memory_limit = -1/memory_limit = 1024M/" /etc/php/7.4/apache2/php.ini  && \
+echo "register_globals = Off" >> /etc/php/7.4/apache2/php.ini  && \
+echo "date.timezone =$TZ" >> /etc/php/7.4/apache2/php.ini  && \
+sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php/7.4/apache2/php.ini
+
 
 #Configer Apache
 ADD ./newznab.conf /etc/apache2/sites-available/newznab.conf
