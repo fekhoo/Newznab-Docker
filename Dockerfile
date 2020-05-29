@@ -1,59 +1,61 @@
 FROM ubuntu:latest 
-MAINTAINER fekhoo@gmail.com
+MAINTAINER Fekhoo <fekhoo@fekhoo.net>
 ARG DEBIAN_FRONTEND=noninteractive
 
-# Add Variables SVN Password and user
-ENV nn_user=svnplus 
-ENV nn_pass=svnplu5
-ENV php_timezone=America/New_York 
-ENV path /:/var/www/html/www/
-
+#Add Variables
+ENV NNUSER="svnplus" \
+    NNPASS="svnplu5" \
+    TZ="America/New_York" 
+    
 #Install required packages
-RUN apt-get update && apt-get -yq install ssh screen tmux apache2 php php-fpm php-pear php-gd php-mysql php-memcache php-curl \
-php-json php-mbstring unrar lame mediainfo subversion ffmpeg memcached 
+RUN apt-get -q update && \
+    apt-get -qy dist-upgrade && \
+    apt-get install -qy ssh screen tmux apache2 php php-fpm php-pear php-gd \
+    php-mysql php-memcache php-curl php-json php-mbstring unrar lame mediainfo \
+    subversion ffmpeg memcached supervisor
+
+#Creating Newznab Folders from SVN
+RUN mkdir /var/www/newznab/ && \
+    svn co --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab/ && \
+    chmod 777 /var/www/newznab/www/lib/smarty/templates_c && \
+    chmod 777 /var/www/newznab/www/covers/movies && \
+    chmod 777 /var/www/newznab/www/covers/anime  && \
+    chmod 777 /var/www/newznab/www/covers/music  && \
+    chmod 777 /var/www/newznab/www  && \
+    chmod 777 /var/www/newznab/www/install  && \
+    chmod 777 /var/www/newznab/nzbfiles/ 
+
+#Add newznab processing script
+ADD ./newznab.sh /newznab.sh
+RUN chmod 755 /*.sh
+
+#Update a few defaults in the php.ini file
+RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini  && \
+echo "date.timezone =$TZ" >> /etc/php/7.4/fpm/php.ini 
 
 #Configer Apache
 ADD ./newznab.conf /etc/apache2/sites-available/newznab.conf
 
-# Creating Newznab Folders from SVN
-RUN mkdir /var/www/newznab/
-RUN svn co --username $nn_user --password $nn_pass svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab/
-RUN chmod 777 /var/www/newznab/www/lib/smarty/templates_c && \
-chmod 777 /var/www/newznab/www/covers/movies && \
-chmod 777 /var/www/newznab/www/covers/anime  && \
-chmod 777 /var/www/newznab/www/covers/music  && \
-chmod 777 /var/www/newznab/www  && \
-chmod 777 /var/www/newznab/www/install  && \
-chmod 777 /var/www/newznab/nzbfiles/ 
-
-#Update a few defaults in the php.ini file
-RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini  && \
-echo "date.timezone =$php_timezone" >> /etc/php/7.4/fpm/php.ini 
-
 #Enable apache mod_rewrite, fpm and restart services
-RUN a2dissite 000-default.conf
-RUN a2ensite newznab
-RUN a2enmod proxy_fcgi setenvif
-RUN a2enconf php7.4-fpm
-RUN a2enmod rewrite
-RUN service apache2 restart
+RUN a2dissite 000-default.conf && \
+    a2ensite newznab && \
+    a2enmod proxy_fcgi setenvif && \
+    a2enconf php7.4-fpm && \
+    a2enmod rewrite && \
+    service apache2 restart
 
 # add newznab config file - This needs to be edited
 ADD ./config.php /var/www/newznab/www/config.php
 RUN chmod 777 /var/www/newznab/www/config.php
 
-#add newznab processing script
-ADD ./newznab.sh /newznab.sh
-RUN chmod 755 /*.sh
-
 #Setup supervisor to start Apache and the Newznab scripts to load headers and build releases
-
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Setup NZB volume this will need to be mapped locally using -v command so that it can persist.
 EXPOSE 80
 VOLUME /nzb
-WORKDIR /var/www/html/www/
+WORKDIR /
+
 #kickoff Supervisor to start the functions
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/usr/bin/supervisord"]
