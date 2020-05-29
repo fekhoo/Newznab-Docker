@@ -63,6 +63,8 @@ RUN chmod 777 /var/www/newznab/www/config.php
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod u+x /entrypoint.sh
 
 EXPOSE 80
 WORKDIR /
