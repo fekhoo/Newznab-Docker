@@ -12,7 +12,7 @@ RUN apt-get -q update && \
     apt-get -qy dist-upgrade && \
     apt-get install -qy ssh screen tmux apache2 php php-fpm php-pear php-gd \
     php-mysql php-memcache php-curl php-json php-mbstring unrar lame mediainfo \
-    subversion ffmpeg memcached supervisor
+    subversion ffmpeg memcached supervisor nano
 
 #Creating Newznab Folders from SVN
 RUN mkdir /var/www/newznab/ && \
@@ -66,7 +66,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Setup NZB volume this will need to be mapped locally using -v command so that it can persist.
 EXPOSE 80
 VOLUME /nzb
-WORKDIR /
+WORKDIR /var/www/newznab/misc/update_scripts
 
 #kickoff Supervisor to start the functions
 CMD ["/usr/bin/supervisord"]
