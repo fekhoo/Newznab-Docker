@@ -63,10 +63,11 @@ RUN chmod 777 /var/www/newznab/www/config.php
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Setup NZB volume this will need to be mapped locally using -v command so that it can persist.
+
 EXPOSE 80
-VOLUME /nzb
 WORKDIR /
+VOLUME [ "/config" ]
+VOLUME [ "/nzb" ]
 
 #kickoff Supervisor to start the functions
 CMD ["/usr/bin/supervisord"]
