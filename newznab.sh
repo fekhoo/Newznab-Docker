@@ -4,19 +4,19 @@
 
 set -e
 
-export NEWZNAB_PATH="/var/www/newznab/misc/update_scripts"
-export NEWZNAB_SLEEP_TIME="30" # in seconds
-LASTOPTIMIZE=`date +%s`
+  export NEWZNAB_PATH="/var/www/newznab/misc/update_scripts"
+  export NEWZNAB_SLEEP_TIME="10" # in seconds
+  LASTOPTIMIZE=`date +%s`
 
 while :
 
  do
-CURRTIME=`date +%s`
-cd ${NEWZNAB_PATH}
-/usr/bin/php ${NEWZNAB_PATH}/update_binaries_threaded.php
-/usr/bin/php ${NEWZNAB_PATH}/update_releases.php
+   CURRTIME=`date +%s`
+   cd ${NEWZNAB_PATH}
+   /usr/bin/php ${NEWZNAB_PATH}/update_binaries_threaded.php
+   /usr/bin/php ${NEWZNAB_PATH}/update_releases.php
 
-DIFF=$(($CURRTIME-$LASTOPTIMIZE))
+   DIFF=$(($CURRTIME-$LASTOPTIMIZE))
 if [ "$DIFF" -gt 43200 ] || [ "$DIFF" -lt 1 ]
 then
 LASTOPTIMIZE=`date +%s`
