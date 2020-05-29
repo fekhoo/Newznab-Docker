@@ -66,7 +66,7 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Setup NZB volume this will need to be mapped locally using -v command so that it can persist.
 EXPOSE 80
 VOLUME /nzb
-WORKDIR /var/www/newznab/misc/update_scripts
+WORKDIR /
 
 #kickoff Supervisor to start the functions
 CMD ["/usr/bin/supervisord"]
