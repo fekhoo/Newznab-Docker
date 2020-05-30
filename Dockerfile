@@ -36,7 +36,11 @@ RUN a2dissite 000-default.conf && \
     a2enmod rewrite && \
     service apache2 restart
 
- "/var/www/newznab/www/covers" 
+#Adding Config File  
+RUN mkdir /var/www/newznab/www
+COPY config.php /config/config.php
+RUN chmod 777 /config/config.php
+
 #Add newznab processing & Config script
 COPY newznab.sh newznab.sh
 RUN chmod a+x /newznab.sh
