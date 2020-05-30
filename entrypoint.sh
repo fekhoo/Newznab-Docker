@@ -15,7 +15,7 @@ sed -i "s/'nnserver'/'$NNTP_SERVER'/" /var/www/newznab/www/config.php
 sed -i "s/563/$NNTP_PORT/" /var/www/newznab/www/config.php
 sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www/newznab/www/config.php
 
-/bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND"
-
+/bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND" && sleep 1m && 
 ./newznab.sh
+
 
