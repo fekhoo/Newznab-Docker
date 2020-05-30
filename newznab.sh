@@ -17,7 +17,6 @@ if [[ -n "$NNUSER" && -n "$NNPASS" ]]; then
 	echo -e "\WARNING: You have no SVN user name and password, restart this container with the correct environment variables.\n"
 fi
 
-
 #Data Base 
 sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php
 sed -i "s/'localhost'/'$DB_HOST'/" /var/www/newznab/www/config.php
@@ -33,6 +32,7 @@ sed -i "s/'nnserver'/'$NNTP_SERVER'/" /var/www/newznab/www/config.php
 sed -i "s/563/$NNTP_PORT/" /var/www/newznab/www/config.php
 sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www/newznab/www/config.php
 
+set -e
 
   export NEWZNAB_PATH="/var/www/newznab/misc/update_scripts"
   export NEWZNAB_SLEEP_TIME="10" # in seconds
