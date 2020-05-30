@@ -16,16 +16,7 @@ sed -i "s/'root'/'$DB_USER'/" /var/www/newznab/www/config.php
 sed -i "s/'password'/'$DB_PASSWORD'/" /var/www/newznab/www/config.php
 sed -i "s/'newznab'/'$DB_NAME'/" /var/www/newznab/www/config.php
 
-NEWZPATH="/var/www/newznab"
-
-#updates to newest svn
-svn co --force --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab
-sleep 5s
-
-#force download/overwrite of current svn
-svn export --force --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab
-
-sleep 5s
+sleep 1m
 
 set -e
 
