@@ -65,4 +65,4 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 
-CMD ["/config.sh","/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord"]
