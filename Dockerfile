@@ -26,10 +26,6 @@ RUN mkdir /var/www/newznab/ && \
     chmod 777 /var/www/newznab/nzbfiles/ && \
     chmod 777 /var/www/newznab/www/covers/tv
 
-#Add newznab processing script
-ADD ./newznab.sh /newznab.sh
-RUN chmod 755 /*.sh
-
 #Update php.ini file
 RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini  && \
     echo "date.timezone =$TZ" >> /etc/php/7.4/fpm/php.ini && \
@@ -44,7 +40,7 @@ RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fp
     sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php/7.4/apache2/php.ini
 
 #Configer Apache
-ADD ./newznab.conf /etc/apache2/sites-available/newznab.conf
+COPY newznab.conf /etc/apache2/sites-available/newznab.conf
 
 #Enable apache mod_rewrite, fpm and restart services
 RUN a2dissite 000-default.conf && \
@@ -53,31 +49,18 @@ RUN a2dissite 000-default.conf && \
     a2enconf php7.4-fpm && \
     a2enmod rewrite && \
     service apache2 restart
-    
+        
 #Adding Config File    
 ADD ./config.php /var/www/newznab/www/config.php
 RUN chmod 777 /var/www/newznab/www/config.php
 
-#Data Base 
-RUN sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php && \
-    sed -i "s/'localhost'/'$DB_HOST'/" /var/www/newznab/www/config.php && \
-    sed -i "s/3306/$DB_PORT/" /var/www/newznab/www/config.php && \
-    sed -i "s/'root'/'$DB_USER'/" /var/www/newznab/www/config.php && \
-    sed -i "s/'password'/'$DB_PASSWORD'/" /var/www/newznab/www/config.php && \
-    sed -i "s/'newznab'/'$DB_NAME'/" /var/www/newznab/www/config.php
+#Add newznab processing & Config script
+COPY newznab.sh newznab.sh
+COPY config.sh config.sh
 
-#Usenet Server
-RUN sed -i "s/'nnuser'/'$NNTP_USERNAME'/" /var/www/newznab/www/config.php && \
-    sed -i "s/'nnpass'/'$NNTP_PASSWORD'/" /var/www/newznab/www/config.php && \
-    sed -i "s/'nnserver'/'$NNTP_SERVER'/" /var/www/newznab/www/config.php && \
-    sed -i "s/563/$NNTP_PORT/" /var/www/newznab/www/config.php && \
-    sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www/newznab/www/config.php   
-
-
-RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd
-ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
-WORKDIR /
 
 CMD ["/usr/bin/supervisord"]
