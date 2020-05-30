@@ -58,6 +58,7 @@ RUN a2dissite 000-default.conf && \
 #RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
 #COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd
 COPY ./config.php /config/config.php
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
