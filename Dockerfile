@@ -12,7 +12,7 @@ RUN apt-get -q update && \
     apt-get -qy dist-upgrade && \
     apt-get install -qy ssh screen tmux apache2 php php-fpm php-pear php-gd \
     php-mysql php-memcache php-curl php-json php-mbstring unrar lame mediainfo \
-    subversion ffmpeg memcached supervisor nano git
+    subversion ffmpeg memcached
 
 #Creating Newznab Folders from SVN
 RUN mkdir /var/www/newznab/ && \
@@ -54,10 +54,6 @@ RUN a2dissite 000-default.conf && \
     a2enmod rewrite && \
     service apache2 restart
 
-#Setup supervisor to start Apache and the Newznab scripts to load headers and build releases
-#RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
-#COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd
 COPY ./config.php /config/config.php
 COPY ./entrypoint.sh /entrypoint.sh
@@ -67,6 +63,4 @@ EXPOSE 80
 WORKDIR /
 VOLUME [ "/config" ]
 
-#kickoff Supervisor to start the functions
-#CMD ["/usr/bin/supervisord"]
 ENTRYPOINT ["/entrypoint.sh"]
