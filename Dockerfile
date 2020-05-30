@@ -67,5 +67,6 @@ ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 80
 WORKDIR /
 
-CMD ["/usr/bin/supervisord"]
 ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/bin/supervisord"]
+
