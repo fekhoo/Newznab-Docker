@@ -68,10 +68,10 @@ RUN sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php && \
 
 #Usenet Server
 RUN sed -i "s/'nnuser'/'$NNTP_USERNAME'/" /var/www/newznab/www/config.php && \
-sed -i "s/'nnpass'/'$NNTP_PASSWORD'/" /var/www/newznab/www/config.php && \
-sed -i "s/'nnserver'/'$NNTP_SERVER'/" /var/www/newznab/www/config.php && \
-sed -i "s/563/$NNTP_PORT/" /var/www/newznab/www/config.php && \
-sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www/newznab/www/config.php   
+    sed -i "s/'nnpass'/'$NNTP_PASSWORD'/" /var/www/newznab/www/config.php && \
+    sed -i "s/'nnserver'/'$NNTP_SERVER'/" /var/www/newznab/www/config.php && \
+    sed -i "s/563/$NNTP_PORT/" /var/www/newznab/www/config.php && \
+    sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www/newznab/www/config.php   
 
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
