@@ -1,4 +1,6 @@
 # Newznab-Unraid
+unserd work
+
 Docker Newznab plus 
 An image running ubuntu and Newznab Plus intended for unraid server, however I am sure it can be run
 
