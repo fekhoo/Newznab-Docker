@@ -55,11 +55,8 @@ RUN a2dissite 000-default.conf && \
     service apache2 restart
     
 #Adding Config File    
-COPY ./config.php /var/www/newznab/www/config.php
+ADD ./config.php /var/www/newznab/www/config.php
 RUN chmod 777 /var/www/newznab/www/config.php
-
-COPY ./entrypoint.sh /entrypoint.sh
-RUN chmod u+x /entrypoint.sh
 
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
@@ -67,6 +64,5 @@ ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 80
 WORKDIR /
 
-ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/usr/bin/supervisord"]
 
