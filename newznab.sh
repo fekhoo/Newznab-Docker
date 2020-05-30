@@ -1,12 +1,23 @@
-#!/bin/sh
-
-sleep 1m
-
+#!/usr/bin/env bash
 set -e
-
+  export NEWZPATH="/var/www/newznab"
   export NEWZNAB_PATH="/var/www/newznab/misc/update_scripts"
   export NEWZNAB_SLEEP_TIME="10" # in seconds
   LASTOPTIMIZE=`date +%s`
+
+#updates to newest svn
+svn co --force --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus $NEWZPATH/
+
+sleep 5s
+
+#force download/overwrite of current svn
+svn export --force --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus $NEWZPATH/
+
+#update db to current rev
+cd $NEWZPATH"/misc/update_scripts"
+$PHP update_database_version.php
+
+sleep 5s
 
 while :
 
