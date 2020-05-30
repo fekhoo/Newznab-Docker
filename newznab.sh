@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sleep 1m
+
 set -e
 
   export NEWZNAB_PATH="/var/www/newznab/misc/update_scripts"
