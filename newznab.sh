@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-# Creating Config File
-if [ ! -f /var/www/newznab/www/config.php ] && [ -f /config/config.php ]; then
-  cp /config/config.php /var/www/newznab/www/config.php
-fi
-touch /var/www/newznab/www/config.php
-rm -f /var/www/newznab/www/config.php
-ln -s /config/config.php /var/www/newznab/www/config.php
-
 # Edit config file DataBase settings
 sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php
 sed -i "s/'localhost'/'$DB_HOST'/" /var/www/newznab/www/config.php
