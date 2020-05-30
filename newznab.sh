@@ -2,7 +2,6 @@
 
 # Creating Newznab Folders from SVN
     echo "Creating newznab folder, make sure you link your NZB and cover folders or they will be deleted!!"
-    mkdir /var/www/newznab/ && \
     svn co --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab/ && \
     chmod 777 /var/www/newznab/www/lib/smarty/templates_c && \
     chmod 777 /var/www/newznab/www  && \
