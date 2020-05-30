@@ -1,23 +1,37 @@
 #!/usr/bin/env bash
-set -e
-  export NEWZPATH="/var/www/newznab"
-  export NEWZNAB_PATH="/var/www/newznab/misc/update_scripts"
-  export NEWZNAB_SLEEP_TIME="10" # in seconds
-  LASTOPTIMIZE=`date +%s`
+
+# Creating Config File
+if [ ! -f /var/www/newznab/www/config.php ] && [ -f /config/config.php ]; then
+  cp /config/config.php /var/www/newznab/www/config.php
+fi
+touch /var/www/newznab/www/config.php
+rm -f /var/www/newznab/www/config.php
+ln -s /config/config.php /var/www/newznab/www/config.php
+
+# Edit config file DataBase settings
+sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php
+sed -i "s/'localhost'/'$DB_HOST'/" /var/www/newznab/www/config.php
+sed -i "s/3306/$DB_PORT/" /var/www/newznab/www/config.php
+sed -i "s/'root'/'$DB_USER'/" /var/www/newznab/www/config.php
+sed -i "s/'password'/'$DB_PASSWORD'/" /var/www/newznab/www/config.php
+sed -i "s/'newznab'/'$DB_NAME'/" /var/www/newznab/www/config.php
+
+NEWZPATH="/var/www/newznab"
 
 #updates to newest svn
-svn co --force --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus $NEWZPATH/
-
+svn co --force --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab
 sleep 5s
 
 #force download/overwrite of current svn
-svn export --force --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus $NEWZPATH/
-
-#update db to current rev
-cd $NEWZPATH"/misc/update_scripts"
-$PHP update_database_version.php
+svn export --force --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab
 
 sleep 5s
+
+set -e
+
+  export NEWZNAB_PATH="/var/www/newznab/misc/update_scripts"
+  export NEWZNAB_SLEEP_TIME="10" # in seconds
+  LASTOPTIMIZE=`date +%s`
 
 while :
 
