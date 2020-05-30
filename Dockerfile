@@ -54,13 +54,9 @@ RUN a2dissite 000-default.conf && \
     a2enmod rewrite && \
     service apache2 restart
 
-# add newznab config file - This needs to be edited
-ADD ./config.php /var/www/newznab/www/config.php
-RUN chmod 777 /var/www/newznab/www/config.php
-
 #Setup supervisor to start Apache and the Newznab scripts to load headers and build releases
-RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+#RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
+#COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
@@ -70,4 +66,5 @@ WORKDIR /
 VOLUME [ "/config" ]
 
 #kickoff Supervisor to start the functions
-CMD ["/usr/bin/supervisord"]
+#CMD ["/usr/bin/supervisord"]
+ENTRYPOINT ["/entrypoint.sh"]
