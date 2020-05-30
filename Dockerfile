@@ -36,7 +36,8 @@ RUN a2dissite 000-default.conf && \
     a2enmod rewrite && \
     service apache2 restart
         
-#Adding Config File    
+#Adding Config File  
+RUN mkdir /var/www/newznab/www
 COPY config.php /var/www/newznab/www/config.php
 RUN chmod 777 /var/www/newznab/www/config.php
 
