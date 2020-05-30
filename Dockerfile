@@ -64,6 +64,6 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 
-VOLUME ["/var/www/newznab/nzbfiles/", "/var/www/newznab/www/covers/", "/config"]
+VOLUME ["/var/www/newznab/nzbfiles/", "/var/www/newznab/www/covers/"]
 
 CMD ["/usr/bin/supervisord"]
