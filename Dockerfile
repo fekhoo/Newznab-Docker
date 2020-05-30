@@ -52,8 +52,8 @@ RUN a2dissite 000-default.conf && \
     service apache2 restart
     
 #Add Newznab Config File  
-COPY config.php /config/config.php
-RUN chmod 777 /config/config.php
+COPY config.php /var/www/newznab/www/config.php
+RUN chmod 777 /var/www/newznab/www/config.php
 
 #Add newznab processing & Config script
 COPY newznab.sh newznab.sh
