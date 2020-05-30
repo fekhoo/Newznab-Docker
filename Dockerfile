@@ -34,5 +34,5 @@ EXPOSE 80
 
 VOLUME ["/var/www/newznab/nzbfiles/", "/var/www/newznab/www/covers", "/config"]
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["/usr/bin/supervisord"]
