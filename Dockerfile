@@ -57,8 +57,6 @@ RUN chmod 777 /var/www/newznab/www/config.php
 #Add newznab processing & Config script
 COPY newznab.sh newznab.sh
 RUN chmod a+x /newznab.sh
-COPY config.sh config.sh
-RUN chmod a+x /config.sh
 
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
