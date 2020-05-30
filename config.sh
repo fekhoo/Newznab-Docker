@@ -1,4 +1,4 @@
-
+#!/bin/sh
 
 #Data Base 
 RUN sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php
