@@ -68,7 +68,6 @@ RUN chmod u+x /entrypoint.sh
 EXPOSE 80
 WORKDIR /
 VOLUME [ "/config" ]
-VOLUME [ "/nzb" ]
 
 #kickoff Supervisor to start the functions
 CMD ["/usr/bin/supervisord"]
