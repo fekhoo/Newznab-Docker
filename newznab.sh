@@ -1,5 +1,23 @@
 #!/bin/sh
 
+# Creating Newznab Folders from SVN
+if [[ -n "$NNUSER" && -n "$NNPASS" ]]; then
+    echo "Creating newznab folder, make sure you link your NZB and cover folders or they will be deleted!!"
+    mkdir /var/www/newznab/ && \
+    svn co --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab/ && \
+    chmod 777 /var/www/newznab/www/lib/smarty/templates_c && \
+    chmod 777 /var/www/newznab/www  && \
+    chmod 777 /var/www/newznab/www/install  && \
+    chmod 777 /var/www/newznab/nzbfiles/ && \
+    chmod 777 /var/www/newznab/www/covers/movies && \
+    chmod 777 /var/www/newznab/www/covers/anime  && \
+    chmod 777 /var/www/newznab/www/covers/music  && \
+    chmod 777 /var/www/newznab/www/covers/tv 
+ else
+	echo -e "\WARNING: You have no SVN user name and password, restart this container with the correct environment variables.\n"
+fi
+
+
 #Data Base 
 sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php
 sed -i "s/'localhost'/'$DB_HOST'/" /var/www/newznab/www/config.php
