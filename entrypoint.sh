@@ -14,5 +14,3 @@ sed -i "s/'nnpass'/'$NNTP_PASSWORD'/" /var/www/newznab/www/config.php
 sed -i "s/'nnserver'/'$NNTP_SERVER'/" /var/www/newznab/www/config.php
 sed -i "s/563/$NNTP_PORT/" /var/www/newznab/www/config.php
 sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www/newznab/www/config.php
-
-./newznab.sh
