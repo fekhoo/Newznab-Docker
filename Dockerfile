@@ -21,10 +21,11 @@ RUN mkdir /var/www/newznab/ && \
     chmod 777 /var/www/newznab/www/covers/movies && \
     chmod 777 /var/www/newznab/www/covers/anime  && \
     chmod 777 /var/www/newznab/www/covers/music  && \
+    chmod 777 /var/www/newznab/www/covers/tv && \
     chmod 777 /var/www/newznab/www  && \
     chmod 777 /var/www/newznab/www/install  && \
-    chmod 777 /var/www/newznab/nzbfiles/ && \
-    chmod 777 /var/www/newznab/www/covers/tv
+    chmod -R 777 /var/www/newznab/nzbfiles/
+    
 
 #Update php.ini file
 RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini  && \
@@ -63,6 +64,6 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 
-VOLUME ["/var/www/newznab/nzbfiles/", "/var/www/newznab/www/covers", "/config"]
+VOLUME ["/var/www/newznab/nzbfiles/", "/var/www/newznab/www/covers/", "/config"]
 
 CMD ["/usr/bin/supervisord"]
