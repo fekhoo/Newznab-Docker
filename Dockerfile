@@ -55,12 +55,14 @@ RUN a2dissite 000-default.conf && \
     service apache2 restart
 
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd
-COPY ./config.php /config/config.php
+
+COPY ./config.php /var/www/newznab/www/config.php
+RUN chmod 777 /var/www/newznab/www/config.php
+
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 
 EXPOSE 80
 WORKDIR /
-VOLUME [ "/config" ]
 
 ENTRYPOINT ["/entrypoint.sh"]
