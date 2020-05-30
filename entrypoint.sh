@@ -1,8 +1,7 @@
 #!/bin/bash
 
 #Creating Config File
-if [[ -n "$DB_TYPE" && -n "$DB_HOST" && -n "$DB_PORT" && -n "$DB_USER" && -n "$DB_PASSWORD" && -n "$DB_NAME" && -n "$NNTP_USERNAME" && -n "$NNTP_PASSWORD" && -n "$NNTP_SERVER" && -n "$NNTP_PORT" && -n "$NNTP_SSLENABLED"]]; then
-
+if [[ -n "$DB_TYPE" && -n "$DB_HOST" && -n "$DB_PORT" && -n "$DB_USER" && -n "$DB_PASSWORD" && -n "$DB_NAME" && -n "$NNTP_USERNAME" && -n "$NNTP_PASSWORD" && -n "$NNTP_SERVER" && -n "$NNTP_PORT" && -n "$NNTP_SSLENABLED" ]]; then
 	echo "Creating database configuration"
 	echo "<?php" > /config/config.php
 	echo "\define('DB_TYPE', '$DB_TYPE');" >> /config/config.php
