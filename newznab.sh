@@ -17,6 +17,16 @@ if [[ -n "$NNUSER" && -n "$NNPASS" ]]; then
 	echo -e "\WARNING: You have no SVN user name and password, restart this container with the correct environment variables.\n"
 fi
 
+# Creating Config File
+if [ ! -f /var/www/newznab/www/config.php ] && [ -f /config/config.php ]; then
+  cp /config/config.php /var/www/newznab/www/config.php
+fi
+
+touch /var/www/newznab/www/config.php
+rm -f /var/www/newznab/www/config.php
+ln -s /config/config.php /var/www/newznab/www/config.php
+chmod 777 /var/www/newznab/www/config.php
+
 #Data Base 
 sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php
 sed -i "s/'localhost'/'$DB_HOST'/" /var/www/newznab/www/config.php
