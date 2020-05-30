@@ -3,7 +3,7 @@ MAINTAINER Fekhoo <fekhoo@fekhoo.net>
 ARG DEBIAN_FRONTEND=noninteractive
 
 #Add Variables
-    TZ="America/New_York" 
+ENV TZ="America/New_York" 
     
 #Install required packages
 RUN apt-get -q update && \
