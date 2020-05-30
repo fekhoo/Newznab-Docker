@@ -23,8 +23,8 @@ RUN chmod 777 /config/config.php
 COPY newznab.sh newznab.sh
 RUN chmod a+x /newznab.sh
 
-COPY ./entrypoint.sh /entrypoint.sh
-RUN chmod u+x /entrypoint.sh
+COPY entrypoint.sh entrypoint.sh
+RUN chmod a+x /entrypoint.sh
 
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
 
