@@ -75,7 +75,7 @@ sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www
 
 
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 WORKDIR /
