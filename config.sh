@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #Data Base 
-RUN sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php
+sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php
 sed -i "s/'localhost'/'$DB_HOST'/" /var/www/newznab/www/config.php
 sed -i "s/3306/$DB_PORT/" /var/www/newznab/www/config.php
 sed -i "s/'root'/'$DB_USER'/" /var/www/newznab/www/config.php
