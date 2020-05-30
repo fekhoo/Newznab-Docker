@@ -27,6 +27,12 @@ echo "\define('CACHEOPT_MEMCACHE_SERVER', '127.0.0.1');" >> /config/config.php
 echo "\define('CACHEOPT_MEMCACHE_PORT', '11211');" >> /config/config.php
 echo "\require("automated.config.php");" >> /config/config.php
 
-# add newznab config file - This needs to be edited
-ADD ./config.php /var/www/newznab/www/config.php
-chmod 777 /var/www/newznab/www/config.php
+fi
+
+if [ -f /config/config.php ]; then
+	chmod 777 /config/config.php
+	rm -f /var/www/newznab/www/config.php
+	ln -s /config/config.php /var/www/newznab/www/config.php
+else
+	echo -e "\nWARNING: You have no database configuration file, either create /config/config.php or restart this container with the correct environment variables to auto generate the config.\n"
+fi
