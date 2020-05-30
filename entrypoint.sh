@@ -1,5 +1,8 @@
+#!/bin/bash
 
 #Creating Config File
+if [[ -n "$DB_TYPE" && -n "$DB_HOST" && -n "$DB_PORT" && -n "$DB_USER" && -n "$DB_PASSWORD" && -n "$DB_NAME" && -n "$NNTP_USERNAME" && -n "$NNTP_PASSWORD" && -n "$NNTP_SERVER" && -n "$NNTP_PORT" && -n "$NNTP_SSLENABLED"]]; then
+
 echo "Creating database configuration"
 echo "<?php" > /config/config.php
 echo "\define('DB_TYPE', '$DB_TYPE');" >> /config/config.php
@@ -23,3 +26,7 @@ echo "\define('CACHEOPT_TTLSLOW', '1800');" >> /config/config.php
 echo "\define('CACHEOPT_MEMCACHE_SERVER', '127.0.0.1');" >> /config/config.php
 echo "\define('CACHEOPT_MEMCACHE_PORT', '11211');" >> /config/config.php
 echo "\require("automated.config.php");" >> /config/config.php
+
+# add newznab config file - This needs to be edited
+ADD ./config.php /var/www/newznab/www/config.php
+chmod 777 /var/www/newznab/www/config.php
