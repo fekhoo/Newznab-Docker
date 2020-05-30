@@ -35,3 +35,14 @@ if [ -f /config/config.php ]; then
 else
 	echo -e "\nWARNING: You have no database configuration file, either create /config/config.php or restart this container with the correct environment variables to auto generate the config.\n"
 fi
+
+# Clean up apache pid (if there is one)
+rm -rf /run/apache2/apache2.pid
+
+# Only restart if one of the enmod commands succeeded 
+if [[ -n $rt ]]; then
+    /etc/init.d/apache2 restart
+fi
+
+screen -dmS newznab && ./newznab.sh
+tail -F /var/log/apache2/* /dev/stdout /dev/stderr
