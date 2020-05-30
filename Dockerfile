@@ -58,21 +58,6 @@ RUN a2dissite 000-default.conf && \
 COPY ./config.php /var/www/newznab/www/config.php
 RUN chmod 777 /var/www/newznab/www/config.php
     
-#Data Base 
-RUN sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php && \
-    sed -i "s/'localhost'/'$DB_HOST'/" /var/www/newznab/www/config.php && \
-    sed -i "s/3306/$DB_PORT/" /var/www/newznab/www/config.php && \
-    sed -i "s/'root'/'$DB_USER'/" /var/www/newznab/www/config.php && \
-    sed -i "s/'password'/'$DB_PASSWORD'/" /var/www/newznab/www/config.php && \
-    sed -i "s/'newznab'/'$DB_NAME'/" /var/www/newznab/www/config.php
-
-#Usenet Server
-RUN sed -i "s/'nnuser'/'$NNTP_USERNAME'/" /var/www/newznab/www/config.php && \
-    sed -i "s/'nnpass'/'$NNTP_PASSWORD'/" /var/www/newznab/www/config.php && \
-    sed -i "s/'nnserver'/'$NNTP_SERVER'/" /var/www/newznab/www/config.php && \
-    sed -i "s/563/$NNTP_PORT/" /var/www/newznab/www/config.php && \
-    sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www/newznab/www/config.php   
-
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
