@@ -28,7 +28,7 @@ else
 fi
 
 # Clean up apache pid (if there is one)
-rm -rf /run/apache2/apache2.pid
+#rm -rf /run/apache2/apache2.pid
 
 screen -dmS newznab && ./newznab.sh
 
