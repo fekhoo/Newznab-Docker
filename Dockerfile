@@ -35,12 +35,8 @@ RUN a2dissite 000-default.conf && \
     a2enconf php7.4-fpm && \
     a2enmod rewrite && \
     service apache2 restart
-        
-#Adding Config File  
-RUN mkdir /var/www/newznab/www
-COPY config.php /var/www/newznab/www/config.php
-RUN chmod 777 /var/www/newznab/www/config.php
 
+ "/var/www/newznab/www/covers" 
 #Add newznab processing & Config script
 COPY newznab.sh newznab.sh
 RUN chmod a+x /newznab.sh
@@ -50,6 +46,6 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
 
-VOLUME ["/var/www/newznab/nzbfiles/", "/var/www/newznab/www/covers"]
+VOLUME ["/var/www/newznab/nzbfiles/", "/var/www/newznab/www/covers", "/config"]
 
 CMD ["/usr/bin/supervisord"]
