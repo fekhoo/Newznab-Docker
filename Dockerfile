@@ -8,11 +8,10 @@ ENV NNUSER="svnplus" \
     TZ="America/New_York" 
     
 # Install required packages
-RUN apt-get -q update && \
-    apt-get -qy dist-upgrade && \
-    apt-get install -qy ssh screen tmux apache2 php php-fpm php-pear php-gd \
-    php-mysql php-memcache php-curl php-json php-mbstring unrar lame mediainfo \
-    subversion ffmpeg memcached nano supervisor
+RUN apt-get -y update && \
+    apt-get install -yq ssh screen tmux apache2 php php-fpm \
+    php-pear php-gd php-mysql php-memcache php-curl php-json php-mbstring \
+    unrar lame mediainfo subversion ffmpeg memcached nano supervisor
     
 # Creating Newznab Folders from SVN
 RUN mkdir /var/www/newznab/ && \
@@ -28,27 +27,6 @@ RUN mkdir /var/www/newznab/ && \
     chmod -R 777 /var/www/newznab/www/covers
     
 
-# Update php.ini file
-RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini  && \
-    echo "date.timezone = $TZ" >> /etc/php/7.4/fpm/php.ini && \
-    sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/cli/php.ini  && \
-    echo "date.timezone = $TZ" >> /etc/php/7.4/cli/php.ini  && \  
-    sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/apache2/php.ini  && \
-    sed -i "s/memory_limit = 128M/memory_limit = -1/" /etc/php/7.4/apache2/php.ini  && \
-    echo "date.timezone = $TZ" >> /etc/php/7.4/apache2/php.ini
-    
-# Configure Apache for Newznab site
-COPY newznab.conf /etc/apache2/sites-available/newznab.conf
-RUN a2dissite 000-default.conf && \
-    a2ensite newznab 
-    
-# Enable apache mod_rewrite, fpm and restart services
-RUN a2enmod proxy_fcgi setenvif && \
-    a2enconf php7.4-fpm && \
-    a2enmod rewrite && \
-    service php7.4-fpm reload && \
-    service apache2 restart
-    
 #Add Newznab Config File  
 COPY config.php /var/www/newznab/www/config.php
 RUN chmod 777 /var/www/newznab/www/config.php
