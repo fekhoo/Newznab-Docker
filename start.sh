@@ -60,5 +60,6 @@ sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www
 cp /var/www/newznab/misc/update_scripts/nix_scripts/newznab_screen.sh /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 sed -i "s|/var/www/newznab/htdocs/misc/update_scripts|/var/www/newznab/misc/update_scripts|" /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 sed -i "s|30|10|" /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
+chmod a+x /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 
-
+/var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
