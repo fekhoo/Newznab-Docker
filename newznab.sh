@@ -49,6 +49,13 @@ sed -i "s/'root'/'$DB_USER'/" /var/www/newznab/www/config.php
 sed -i "s/'password'/'$DB_PASSWORD'/" /var/www/newznab/www/config.php
 sed -i "s/'newznab'/'$DB_NAME'/" /var/www/newznab/www/config.php
 
+#Edit config file Usenet Server Settings
+sed -i "s/'nnuser'/'$NNTP_USERNAME'/" /var/www/newznab/www/config.php
+sed -i "s/'nnpass'/'$NNTP_PASSWORD'/" /var/www/newznab/www/config.php
+sed -i "s/'nnserver'/'$NNTP_SERVER'/" /var/www/newznab/www/config.php
+sed -i "s/563/$NNTP_PORT/" /var/www/newznab/www/config.php
+sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www/newznab/www/config.php
+
 sleep 1m
 
 set -e
