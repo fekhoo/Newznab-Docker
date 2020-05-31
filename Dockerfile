@@ -32,14 +32,14 @@ RUN mkdir /var/www/newznab/ && \
 RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini  && \
     echo "date.timezone =$TZ" >> /etc/php/7.4/fpm/php.ini && \
     sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/cli/php.ini  && \
-    sed -i "s/memory_limit = -1/memory_limit = 1024M/" /etc/php/7.4/cli/php.ini  && \
+    sed -i "s/memory_limit = -1/memory_limit = 4096M/" /etc/php/7.4/cli/php.ini  && \
     echo "register_globals = Off" >> /etc/php/7.4/cli/php.ini  && \
     echo "date.timezone =$TZ" >> /etc/php/7.4/cli/php.ini  && \
     sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/apache2/php.ini  && \
-    sed -i "s/memory_limit = -1/memory_limit = 1024M/" /etc/php/7.4/apache2/php.ini  && \
+    sed -i "s/memory_limit = -1/memory_limit = 4096M/" /etc/php/7.4/apache2/php.ini  && \
     echo "register_globals = Off" >> /etc/php/7.4/apache2/php.ini  && \
     echo "date.timezone =$TZ" >> /etc/php/7.4/apache2/php.ini  && \
-    sed -i "s/memory_limit = 128M/memory_limit = 1024M/" /etc/php/7.4/apache2/php.ini
+    sed -i "s/memory_limit = 128M/memory_limit = 4096M/" /etc/php/7.4/apache2/php.ini
 
 #Add Apache config file
 COPY newznab.conf /etc/apache2/sites-available/newznab.conf
