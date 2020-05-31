@@ -16,8 +16,8 @@ RUN apt-get -q update && \
     
 #Creating Newznab Folders from SVN
 RUN mkdir /var/www/newznab/ && \
-    mkdir /var/www/newznab/ && \
-    mkdir /var/www/newznab/
+    mkdir /var/www/newznab/nzbfiles && \
+    mkdir /var/www/newznab/www/covers
     
 VOLUME ["/var/www/newznab/nzbfiles", "/var/www/newznab/www/covers"]
 
