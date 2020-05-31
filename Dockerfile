@@ -16,7 +16,7 @@ RUN apt-get -q update && \
     
 # Creating Newznab Folders from SVN
 RUN mkdir /var/www/newznab/ && \
-    svn co --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab/ && \
+    svn export --no-auth-cache --force --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab/ && \
     chmod 777 /var/www/newznab/www/lib/smarty/templates_c && \
     chmod 777 /var/www/newznab/www/covers/movies && \
     chmod 777 /var/www/newznab/www/covers/anime  && \
