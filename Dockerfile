@@ -32,7 +32,7 @@ RUN mkdir /var/www/newznab/ && \
 #FPM
 RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini  && \
     sed -i "s/memory_limit = 128M/memory_limit = -1/" /etc/php/7.4/cli/php.ini && \
-    echo "date.timezone = $TZ" >> /etc/php/7.4/fpm/php.ini && \
+    echo "date.timezone = $TZ" >> /etc/php/7.4/fpm/php.ini
     
     
 #    sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/cli/php.ini  && \
