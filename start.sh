@@ -58,4 +58,7 @@ sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www
 
 # Getting script ready for newznab
 cp /var/www/newznab/misc/update_scripts/nix_scripts/newznab_screen.sh /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
-sed -i "s/'nnuser'/'$NNTP_USERNAME'/" /var/www/newznab/www/config.php
+sed -i "s|/var/www/newznab/htdocs/misc/update_scripts|/var/www/newznab/misc/update_scripts|" /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
+sed -i "s|30|10|" /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
+
+
