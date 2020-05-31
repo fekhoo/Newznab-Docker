@@ -1,4 +1,4 @@
-#!/usr/bin
+#!/usr/bin/env bash
 
 #Creating needed folders
 if [ ! -f /var/www/newznab/www/covers/anime ]; then
