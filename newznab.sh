@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
 
-
-chmod 777 /var/www/newznab/www/lib/smarty/templates_c
-chmod 777 /var/www/newznab/www/covers/movies
-chmod 777 /var/www/newznab/www/covers/anime
-chmod 777 /var/www/newznab/www/covers/music 
-chmod 777 /var/www/newznab/www/covers/tv
-chmod 777 /var/www/newznab/www
-chmod 777 /var/www/newznab/www/install
-chmod -R 777 /var/www/newznab/nzbfiles/
-
 # Edit config file DataBase settings
 sed -i "s/'mysql'/'$DB_TYPE'/" /var/www/newznab/www/config.php
 sed -i "s/'localhost'/'$DB_HOST'/" /var/www/newznab/www/config.php
