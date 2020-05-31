@@ -48,7 +48,7 @@ RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fp
 # Configure Apache for Newznab site
 COPY newznab.conf /etc/apache2/sites-available/newznab.conf
 RUN a2dissite 000-default.conf && \
-    a2ensite newznab && \
+    a2ensite newznab 
     
 # Enable apache mod_rewrite, fpm and restart services
 RUN a2enmod proxy_fcgi setenvif && \
