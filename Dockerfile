@@ -15,11 +15,8 @@ RUN apt-get -q update && \
     subversion ffmpeg memcached nano supervisor
     
 #Creating Newznab Folders from SVN
-RUN mkdir /var/www/newznab
-
-VOLUME ["/var/www/newznab/nzbfiles", "/var/www/newznab/www/covers"]
-
-RUN svn co --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab/ && \
+RUN mkdir /var/www/newznab/ && \
+    svn co --username $NNUSER --password $NNPASS svn://svn.newznab.com/nn/branches/nnplus /var/www/newznab/ && \
     chmod 777 /var/www/newznab/www/lib/smarty/templates_c && \
     chmod 777 /var/www/newznab/www/covers/movies && \
     chmod 777 /var/www/newznab/www/covers/anime  && \
@@ -67,5 +64,8 @@ RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/superviso
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
+
+VOLUME /var/www/newznab/nzbfiles
+VOLUME /var/www/newznab/www/covers
 
 CMD ["/usr/bin/supervisord"]
