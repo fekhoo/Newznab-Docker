@@ -20,18 +20,18 @@ if [ ! -f /var/www/newznab/www/covers/audio ]; then
  mkdir -p /var/www/newznab/www/covers/audio
  chmod  -R 777 /var/www/newznab/www/covers/audio
  fi
-
- if [ ! -f /var/www/newznab/www/covers/book ]; then
+ 
+if [ ! -f /var/www/newznab/www/covers/book ]; then
  mkdir -p /var/www/newznab/www/covers/book
  chmod  -R 777 /var/www/newznab/www/covers/book
  fi
 
-  if [ ! -f /var/www/newznab/www/covers/console ]; then
+if [ ! -f /var/www/newznab/www/covers/console ]; then
  mkdir -p /var/www/newznab/www/covers/console
  chmod  -R 777 /var/www/newznab/www/covers/console
  fi
 
- if [ ! -f /var/www/newznab/www/covers/movies ]; then
+if [ ! -f /var/www/newznab/www/covers/movies ]; then
  mkdir -p /var/www/newznab/www/covers/movies
  chmod  -R 777 /var/www/newznab/www/covers/movies
  fi
@@ -63,26 +63,18 @@ sed -i "s|30|10|" /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local
 chmod a+x /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 
 # Update php.ini file
-RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini  && \
-    echo "date.timezone = $TZ" >> /etc/php/7.4/fpm/php.ini && \
-    sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/cli/php.ini  && \
-    echo "date.timezone = $TZ" >> /etc/php/7.4/cli/php.ini  && \  
-    sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/apache2/php.ini  && \
-    sed -i "s/memory_limit = 128M/memory_limit = -1/" /etc/php/7.4/apache2/php.ini  && \
-    echo "date.timezone = $TZ" >> /etc/php/7.4/apache2/php.ini
-    
-
-RUN a2dissite 000-default.conf && \
-    a2ensite newznab 
-    
+sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini
+echo "date.timezone = $TZ" >> /etc/php/7.4/fpm/php.ini
+sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/cli/php.ini
+echo "date.timezone = $TZ" >> /etc/php/7.4/cli/php.ini
+sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/apache2/php.ini
+sed -i "s/memory_limit = 128M/memory_limit = -1/" /etc/php/7.4/apache2/php.ini
+echo "date.timezone = $TZ" >> /etc/php/7.4/apache2/php.ini
+      
 # Enable apache mod_rewrite, fpm and restart services
-RUN a2enmod proxy_fcgi setenvif && \
-    a2enconf php7.4-fpm && \
-    a2enmod rewrite && \
-    service php7.4-fpm reload && \
-    service apache2 restart
-    
-
-
-/var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
+a2enmod proxy_fcgi setenvif
+a2enconf php7.4-fpm
+a2enmod rewrite
+service php7.4-fpm reload
+service apache2 restart
 
