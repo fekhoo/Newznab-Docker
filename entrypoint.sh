@@ -70,7 +70,7 @@ if [[ "$CACHEOPT_TTLSLOW" ]]; then
     sed -i "s/'1800'/'$CACHEOPT_TTLSLOW'/" /var/www/newznab/www/config.php
 fi
 if [[ "$CACHEOPT_MEMCACHE_SERVER" ]]; then
-    sed -i "s/'memserver'/'$CACHEOPT_MEMCACHE_SERVER'/" /var/www/newznab/www/config.php
+    sed -i "s/'127.0.0.1'/'$CACHEOPT_MEMCACHE_SERVER'/" /var/www/newznab/www/config.php
 fi
 if [[ "$CACHEOPT_MEMCACHE_PORT" ]]; then
     sed -i "s/'11211'/'$CACHEOPT_MEMCACHE_PORT'/" /var/www/newznab/www/config.php
@@ -78,7 +78,7 @@ fi
 
 
 if [[ "$CACHEOPT_REDIS_SERVER" ]]; then
-    sed -i "s/'redisserver'/'$CACHEOPT_REDIS_SERVER'/" /var/www/newznab/www/config.php
+    sed -i "s/'127.0.0.1'/'$CACHEOPT_REDIS_SERVER'/" /var/www/newznab/www/config.php
 fi
 if [[ "$CACHEOPT_REDIS_PORT" ]]; then
     sed -i "s/'6379'/'$CACHEOPT_REDIS_PORT'/" /var/www/newznab/www/config.php
