@@ -3,8 +3,8 @@ MAINTAINER Fekhoo <fekhoo@fekhoo.net>
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Add Variables
-ENV NNUSER="svnuser" \
-    NNPASS="svnpass"
+ENV NNUSER="svnplus" \
+    NNPASS="svnplu5"
     
 # Install required packages
 RUN apt-get -y update && \
