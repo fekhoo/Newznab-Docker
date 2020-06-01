@@ -1,22 +1,5 @@
 #!/usr/bin/env bash
 
-# Update php.ini file
-sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini
-echo "date.timezone = $TZ" >> /etc/php/7.4/fpm/php.ini
-sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/cli/php.ini
-echo "date.timezone = $TZ" >> /etc/php/7.4/cli/php.ini
-sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/apache2/php.ini
-sed -i "s/memory_limit = 128M/memory_limit = -1/" /etc/php/7.4/apache2/php.ini
-echo "date.timezone = $TZ" >> /etc/php/7.4/apache2/php.ini
-    
-# Enable apache mod_rewrite, fpm and restart services
-a2dissite 000-default.conf
-a2ensite newznab.conf
-a2enmod proxy_fcgi setenvif
-a2enconf php7.4-fpm
-a2enmod rewrite
-service php7.4-fpm reload
-
 #Creating needed folders
 if [ ! -f /var/www/newznab/www/covers/anime ]; then 
 mkdir -p /var/www/newznab/www/covers/anime
@@ -79,7 +62,22 @@ sed -i "s|/var/www/newznab/htdocs/misc/update_scripts|/var/www/newznab/misc/upda
 sed -i "s|30|10|" /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 chmod a+x /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 
-# Restart Apache2
+# Update php.ini file
+sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini
+echo "date.timezone = $TZ" >> /etc/php/7.4/fpm/php.ini
+sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/cli/php.ini
+echo "date.timezone = $TZ" >> /etc/php/7.4/cli/php.ini
+sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/apache2/php.ini
+sed -i "s/memory_limit = 128M/memory_limit = -1/" /etc/php/7.4/apache2/php.ini
+echo "date.timezone = $TZ" >> /etc/php/7.4/apache2/php.ini
+    
+# Enable Newznab site, Apache mod_rewrite, fpm and restart services
+a2dissite 000-default.conf
+a2ensite newznab.conf
+a2enmod proxy_fcgi setenvif
+a2enconf php7.4-fpm
+a2enmod rewrite
+service php7.4-fpm reload
 /etc/init.d/apache2 restart
 
 # Start newznab Service
