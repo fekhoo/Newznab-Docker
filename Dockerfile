@@ -48,4 +48,4 @@ EXPOSE 80
 VOLUME /var/www/newznab/nzbfiles
 VOLUME /var/www/newznab/www/covers
 
-CMD ["/usr/bin/supervisord"]
+ENTRYPOINT ["/start.sh"]
