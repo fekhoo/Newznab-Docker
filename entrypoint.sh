@@ -56,6 +56,34 @@ sed -i "s/'nnserver'/'$NNTP_SERVER'/" /var/www/newznab/www/config.php
 sed -i "s/563/$NNTP_PORT/" /var/www/newznab/www/config.php
 sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www/newznab/www/config.php
 
+# Edit config file cash settings
+if [[ "$CACHEOPT_METHOD" ]]; then
+    sed -i "s/'none'/'$CACHEOPT_METHOD'/" /var/www/newznab/www/config.php
+fi
+if [[ "$CACHEOPT_TTLFAST" ]]; then
+    sed -i "s/'120'/'$CACHEOPT_TTLFAST'/" /var/www/newznab/www/config.php
+fi
+if [[ "$CACHEOPT_TTLMEDIUM" ]]; then
+    sed -i "s/'600'/'$CACHEOPT_TTLMEDIUM'/" /var/www/newznab/www/config.php
+fi
+if [[ "$CACHEOPT_TTLSLOW" ]]; then
+    sed -i "s/'1800'/'$CACHEOPT_TTLSLOW'/" /var/www/newznab/www/config.php
+fi
+if [[ "$CACHEOPT_MEMCACHE_SERVER" ]]; then
+    sed -i "s/'memserver'/'$CACHEOPT_MEMCACHE_SERVER'/" /var/www/newznab/www/config.php
+fi
+if [[ "$CACHEOPT_MEMCACHE_PORT" ]]; then
+    sed -i "s/'11211'/'$CACHEOPT_MEMCACHE_PORT'/" /var/www/newznab/www/config.php
+fi
+
+
+if [[ "$CACHEOPT_REDIS_SERVER" ]]; then
+    sed -i "s/'redisserver'/'$CACHEOPT_REDIS_SERVER'/" /var/www/newznab/www/config.php
+fi
+if [[ "$CACHEOPT_REDIS_PORT" ]]; then
+    sed -i "s/'6379'/'$CACHEOPT_REDIS_PORT'/" /var/www/newznab/www/config.php
+fi
+
 # Getting script ready for newznab Screen
 cp /var/www/newznab/misc/update_scripts/nix_scripts/newznab_screen.sh /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 sed -i "s|/var/www/newznab/htdocs/misc/update_scripts|/var/www/newznab/misc/update_scripts|" /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
