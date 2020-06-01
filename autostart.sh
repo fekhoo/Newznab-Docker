@@ -23,12 +23,12 @@ case "$1" in
         echo -n "Starting Newznab binaries update"
         cd ${NN_PATH}
         (while (true);do cd ${NN_PATH} && \
-        php ${NN_BINUP}  2>&1 > /dev/null && \
-        php ${NN_RELUP}  2>&1 > /dev/null && \
-        php ${NN_OPTUP}  2>&1 > /dev/null && \
-        php ${NN_TVUP}  2>&1 > /dev/null && \
-        php ${NN_THRUP}  2>&1 > /dev/null && \
-        php ${NN_PREUP}  2>&1 > /dev/null ; sleep ${NN_SLEEP_TIME} ;done) &
+        php ${NN_BINUP}  2>&1 > /dev/stdout && \
+        php ${NN_RELUP}  2>&1 > /dev/stdout && \
+        php ${NN_OPTUP}  2>&1 > /dev/stdout && \
+        php ${NN_TVUP}  2>&1 > /dev/stdout && \
+        php ${NN_THRUP}  2>&1 > /dev/stdout && \
+        php ${NN_PREUP}  2>&1 > /dev/stdout ; sleep ${NN_SLEEP_TIME} ;done) &
         PID=`echo $!`
         echo $PID > ${NN_PID_PATH}${PIDFILE}
         ;;
