@@ -34,8 +34,7 @@ RUN chmod 777 /var/www/newznab/www/config.php
 # Configure Apache for Newznab site
 COPY newznab.conf /etc/apache2/sites-available/newznab.conf
 RUN a2dissite 000-default.conf && \
-    a2ensite newznab && \
-    a2enmod rewrite
+    a2ensite newznab
 
 #Add newznab processing & Config script
 COPY start.sh start.sh
