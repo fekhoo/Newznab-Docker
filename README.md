@@ -45,6 +45,7 @@ Go to http://yourip:yourport/install and follow the installation wizard to the e
 - check for password : deep
 - delete passworded releases : yes
 ```
+Now activate at least one group to use as a test such as alt.binaries.teevee and you should see some builds start to show up in your server.
 
 ### Variables
 
