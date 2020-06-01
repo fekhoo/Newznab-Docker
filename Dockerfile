@@ -31,6 +31,9 @@ RUN mkdir /var/www/newznab/ && \
 COPY config.php /var/www/newznab/www/config.php
 RUN chmod 777 /var/www/newznab/www/config.php
 
+# Configure Apache for Newznab site
+COPY newznab.conf /etc/apache2/sites-available/newznab.conf
+
 #Add newznab processing & Config script
 COPY start.sh start.sh
 RUN chmod u+x /start.sh
