@@ -36,7 +36,7 @@ RUN a2dissite 000-default.conf && \
 
 #Add newznab processing & Config script
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod u+x /start.sh
+RUN chmod u+x /entrypoint.sh
 COPY autostart.sh /etc/init.d/autostart.sh
 RUN chmod u+x /etc/init.d/autostart.sh
 RUN update-rc.d autostart.sh defaults
