@@ -31,15 +31,14 @@ RUN chmod 777 /var/www/newznab/www/config.php
 
 # Configure Apache for Newznab site
 COPY newznab.conf /etc/apache2/sites-available/newznab.conf
-RUN a2dissite 000-default.conf && \
-    a2ensite newznab.conf
 
 #Add newznab processing & Config script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
-COPY autostart.sh /etc/init.d/autostart.sh
-RUN chmod u+x /etc/init.d/autostart.sh
-RUN update-rc.d autostart.sh defaults
+
+#COPY autostart.sh /etc/init.d/autostart.sh
+#RUN chmod u+x /etc/init.d/autostart.sh
+#RUN update-rc.d autostart.sh defaults
 
 EXPOSE 80
 
