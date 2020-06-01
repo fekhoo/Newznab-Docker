@@ -4,7 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Add Variables
 ENV NNUSER="svnplus" \
-    NNPASS="svnplu5" \
+    NNPASS="svnplu5"
     
 # Install required packages
 RUN apt-get -y update && \
