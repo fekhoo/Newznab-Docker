@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Newznab variables 
 NN_PATH="/var/www/newznab/misc/update_scripts"
