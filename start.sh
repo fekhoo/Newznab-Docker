@@ -74,11 +74,10 @@ echo "date.timezone = $TZ" >> /etc/php/7.4/apache2/php.ini
 
 
 # Enable apache mod_rewrite, fpm and restart services
-rm -rf /run/apache2/apache2.pid
 a2enmod proxy_fcgi setenvif
 a2enconf php7.4-fpm
 a2enmod rewrite
 service php7.4-fpm reload
 service apache2 restart
 
-apachectl -D FOREGROUND
+/bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND"
