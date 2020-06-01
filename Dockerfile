@@ -53,7 +53,7 @@ RUN a2enmod proxy_fcgi setenvif && \
     service apache2 restart
 
 #Add newznab processing & Config script
-COPY start.sh /start.sh
+COPY entrypoint.sh /entrypoint.sh
 RUN chmod u+x /start.sh
 COPY autostart.sh /etc/init.d/autostart.sh
 RUN chmod u+x /etc/init.d/autostart.sh
@@ -64,4 +64,4 @@ EXPOSE 80
 VOLUME /var/www/newznab/nzbfiles
 VOLUME /var/www/newznab/www/covers
 
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
