@@ -16,6 +16,8 @@ Run the following comand, change variables to match your settings
 docker run --restart=always -d -p 80:80 \
 	--hostname=newznab \
 	--name=newznab \
+	-v <Distenation to covers folder>:/var/www/newznab/www/covers \
+	-v <Distenation to nzb folder>:/var/www/newznab/nzbfiles \
 	-e 'TZ=America/Newy_York' \
 	-e 'NNUSER=svnuser' \
 	-e 'NNPASS=svnpw' \
@@ -24,11 +26,13 @@ docker run --restart=always -d -p 80:80 \
 	-e 'DB_PORT=3306' \
 	-e 'DB_USER=user' \
 	-e 'DB_PASSWORD=password' \
+	-e 'DB_NAME=newznab' \
 	-e 'NNTP_USERNAME=nnuser' \
 	-e 'NNTP_PASSWORD=nnpw' \
 	-e 'NNTP_SERVER=server.com' \
 	-e 'NNTP_PORT=569' \
-	-e 'NNTP_SSLENABLED=tr
+	-e 'NNTP_SSLENABLED=true' \
+	
 ```
 
 docker ru
