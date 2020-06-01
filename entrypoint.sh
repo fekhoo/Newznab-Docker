@@ -10,6 +10,8 @@ sed -i "s/memory_limit = 128M/memory_limit = -1/" /etc/php/7.4/apache2/php.ini
 echo "date.timezone = $TZ" >> /etc/php/7.4/apache2/php.ini
     
 # Enable apache mod_rewrite, fpm and restart services
+a2dissite 000-default.conf
+a2ensite newznab.conf
 a2enmod proxy_fcgi setenvif
 a2enconf php7.4-fpm
 a2enmod rewrite
@@ -81,7 +83,7 @@ chmod a+x /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 /etc/init.d/apache2 restart
 
 # Start newznab Service
-/etc/init.d/autostart.sh start
+/var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 
 #Keep Docker up!!
 tail -f /var/log/apache2/* /dev/stdout /dev/stderr
