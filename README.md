@@ -59,9 +59,9 @@ Go to http://yourip:yourport/install and follow the installation wizard to the e
 | `DB_USER` | Database user 'root'. |
 | `DB_PASSWORD` | Database user password.|
 | `NNTP_USERNAME` | Usenet provider user name. |
-| `NNTP_PASSWORD` | Usenet provider user name. |
-| `NNTP_SERVER` | Usenet provider user name. |
-| `NNTP_PORT` | Usenet provider user name. |
-| `NNTP_SSLENABLED` | Usenet provider user name. |
+| `NNTP_PASSWORD` | Usenet provider password. |
+| `NNTP_SERVER` | Usenet provider server address. |
+| `NNTP_PORT` | Usenet provider port number. |
+| `NNTP_SSLENABLED` | Usenet provider SLL true or false. |
 
 
