@@ -78,5 +78,4 @@ a2enmod rewrite
 service php7.4-fpm reload
 service apache2 restart
 
-#Starting auto newznab script
-update-rc.d autostart.sh defaults
+apachectl -D FOREGROUND
