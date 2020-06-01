@@ -71,8 +71,7 @@ RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fp
     sed -i "s/memory_limit = 128M/memory_limit = -1/" /etc/php/7.4/apache2/php.ini  && \
     echo "date.timezone = $TZ" >> /etc/php/7.4/apache2/php.ini
     
-# Configure Apache for Newznab site
-COPY newznab.conf /etc/apache2/sites-available/newznab.conf
+
 RUN a2dissite 000-default.conf && \
     a2ensite newznab 
     
