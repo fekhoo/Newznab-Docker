@@ -39,6 +39,9 @@ RUN a2dissite 000-default.conf && \
 #Add newznab processing & Config script
 COPY start.sh start.sh
 RUN chmod u+x /start.sh
+COPY autostart.sh /etc/init.d/autostart.sh
+RUN chmod u+x /etc/init.d/autostart.sh
+RUN update-rc.d autostart.sh defaults
 
 # RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
 # COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
