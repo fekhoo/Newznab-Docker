@@ -10,6 +10,25 @@ Requirements
 
 Installation
 
+```
+docker run --restart=always -d -p 80:80 \
+	--hostname=newznab \
+	--name=newznab \
+	-e 'TZ=America/Newy_York' \
+	-e 'NNUSER=svnuser' \
+	-e 'NNPASS=svnpw' \
+	-e 'DB_TYPE=mysql' \
+	-e 'DB_HOST=localhost' \
+	-e 'DB_PORT=3306' \
+	-e 'DB_USER=user' \
+	-e 'DB_PASSWORD=password' \
+	-e 'NNTP_USERNAME=nnuser' \
+	-e 'NNTP_PASSWORD=nnpw' \
+	-e 'NNTP_SERVER=server.com' \
+	-e 'NNTP_PORT=569' \
+	-e 'NNTP_SSLENABLED=tr
+```
+
 docker ru
 
 For the first run go to http://yourserver/install   and step through the installer - This forces a Build of the Database in MYSQL and creates a user.
