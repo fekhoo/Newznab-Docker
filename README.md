@@ -1,4 +1,4 @@
-# Newznab+
+# Newznab+ Docker
 
 newznab is a usenet indexing application, that makes building a usenet community easy. http://www.newznab.com/
 This is a ubuntu docker image with newznab Plus intended for use on unraid server.
