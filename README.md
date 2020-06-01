@@ -4,9 +4,9 @@ newznab is a usenet indexing application, that makes building a usenet community
 This is a ubuntu docker image with newznab Plus intended for use on unraid server.
 
 Requirements
-- You need a seperate MySQL docker.
+- You need a seperate MySQL server.
 - Newznab SVN user name and password.
-- NewznabID
+- NewznabID.
 
 Installation
 
