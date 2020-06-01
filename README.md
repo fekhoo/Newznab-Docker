@@ -34,5 +34,15 @@ docker run --restart=always -d -p 80:80 \
 	-e 'NNTP_SSLENABLED=true' \
 	
 ```
-Go to http://yourserver/install and setup data base, usenet server, and admin user account
+Go to http://yourserver/install and follow the installation wizard to the end. After completing the installation go to the admin edit site http://<your server IP>/admin/site-edit.php and set up  some paths and config options:
+	...
+		newznabID : <use your owen ID>
+		unrar path : /usr/bin/unrar
+		mediainfo path : /usr/bin/mediainfo
+		ffmpeg path : /usr/bin/ffmpeg
+		lame path : /usr/bin/lame
+		check for password : deep
+		delete passworded releases : yes
+	...
+	
 
