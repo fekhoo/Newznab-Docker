@@ -26,3 +26,6 @@ docker run --restart=always -d -p 8800:80 \
 	-e 'NNTP_SERVER=server.com' \
 	-e 'NNTP_PORT=569' \
 	-e 'NNTP_SSLENABLED=true' \
+	
+	For the first run go to http://yourserver/install   and step through the installer - This forces a Build of the Database in MYSQL and creates a user.
+	
