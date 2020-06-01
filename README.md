@@ -45,16 +45,23 @@ Go to http://yourip:yourport/install and follow the installation wizard to the e
 - check for password : deep
 - delete passworded releases : yes
 ```
-	
 
+### Variables
 
-
-
-
-
-
-### Environment variables
-| Variable | Function |
+| Variable | Meaning |
 | --- | --- |
+| `TZ` | Time Zone example `America/New_York`. |
+| `NNUSER` | Newznab plus user name for svn downlaod. |
+| `NNPASS` | Newznab plus password for svn downlaod. |
+| `DB_TYPE` | Database type 'Mysql'. |
+| `DB_HOST` | Database location 'localhost'. |
+| `DB_PORT` | Database port '3306'. |
+| `DB_USER` | Database user 'root'. |
+| `DB_PASSWORD` | Database user password.|
+| `NNTP_USERNAME` | Usenet provider user name. |
+| `NNTP_PASSWORD` | Usenet provider user name. |
+| `NNTP_SERVER` | Usenet provider user name. |
+| `NNTP_PORT` | Usenet provider user name. |
+| `NNTP_SSLENABLED` | Usenet provider user name. |
 
 
