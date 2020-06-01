@@ -62,5 +62,5 @@ sed -i "s|/var/www/newznab/htdocs/misc/update_scripts|/var/www/newznab/misc/upda
 sed -i "s|30|10|" /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 chmod a+x /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 
-
-/bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND"
+tail -f /dev/null
+#/bin/bash -c "source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND"
