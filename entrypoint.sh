@@ -78,10 +78,10 @@ a2enmod proxy_fcgi setenvif
 a2enconf php7.4-fpm
 a2enmod rewrite
 service php7.4-fpm reload
-/etc/init.d/apache2 restart
+/etc/init.d/apache2 restart 
 
 # Start newznab Service
-/var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
+/var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.shv 2>&1 > /dev/stdout
 
 #Keep Docker up!!
 tail -f /var/log/apache2/* /dev/stdout /dev/stderr
