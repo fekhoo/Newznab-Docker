@@ -31,10 +31,26 @@ RUN mkdir /var/www/newznab/ && \
 COPY config.php /var/www/newznab/www/config.php
 RUN chmod 777 /var/www/newznab/www/config.php
 
+# Update php.ini file
+RUN sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini && \
+    echo "date.timezone = $TZ" >> /etc/php/7.4/fpm/php.ini && \
+    sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/cli/php.ini && \
+    echo "date.timezone = $TZ" >> /etc/php/7.4/cli/php.ini && \
+    sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/apache2/php.ini && \
+    sed -i "s/memory_limit = 128M/memory_limit = -1/" /etc/php/7.4/apache2/php.ini && \
+    echo "date.timezone = $TZ" >> /etc/php/7.4/apache2/php.ini
+
 # Configure Apache for Newznab site
 COPY newznab.conf /etc/apache2/sites-available/newznab.conf
 RUN a2dissite 000-default.conf && \
     a2ensite newznab.conf
+
+# Enable apache mod_rewrite, fpm and restart services
+RUN a2enmod proxy_fcgi setenvif && \
+    a2enconf php7.4-fpm && \
+    a2enmod rewrite && \
+    service php7.4-fpm reload && \
+    service apache2 restart
 
 #Add newznab processing & Config script
 COPY start.sh /start.sh
@@ -43,9 +59,9 @@ COPY autostart.sh /etc/init.d/autostart.sh
 RUN chmod u+x /etc/init.d/autostart.sh
 RUN update-rc.d autostart.sh defaults
 
-# RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
+#RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd 
 # COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
+# /var/log/supervisor
 EXPOSE 80
 
 VOLUME /var/www/newznab/nzbfiles
