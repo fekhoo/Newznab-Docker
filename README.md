@@ -34,7 +34,7 @@ docker run --restart=always -d -p 80:80 \
 	-e 'NNTP_SSLENABLED=true' \
 	
 ```
-Go to http://yourserver/install and follow the installation wizard to the end. After completing the installation go to the admin edit site http://<your server IP>/admin/site-edit.php and set up  some paths and config options:
+Go to http://yourip:yourport/install and follow the installation wizard to the end. After completing the installation go to the admin edit site http://yourip:yourport/admin/site-edit.php and set up some paths and config options:
 	
 ```
 - newznabID : <use your owen ID>
