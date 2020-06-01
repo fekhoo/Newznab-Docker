@@ -10,6 +10,8 @@ Requirements
 
 Installation
 
+docker ru
+
 For the first run go to http://yourserver/install   and step through the installer - This forces a Build of the Database in MYSQL and creates a user.
 
 docker run --restart=always -d -p 8800:80 \
