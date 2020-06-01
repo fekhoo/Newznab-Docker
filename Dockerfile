@@ -36,10 +36,6 @@ COPY newznab.conf /etc/apache2/sites-available/newznab.conf
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 
-#COPY autostart.sh /etc/init.d/autostart.sh
-#RUN chmod u+x /etc/init.d/autostart.sh
-#RUN update-rc.d autostart.sh defaults
-
 EXPOSE 80
 
 VOLUME /var/www/newznab/nzbfiles
