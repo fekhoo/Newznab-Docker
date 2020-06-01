@@ -47,3 +47,14 @@ Go to http://yourip:yourport/install and follow the installation wizard to the e
 ```
 	
 
+
+
+
+
+
+
+### Environment variables
+| Variable | Function |
+| --- | --- |
+
+
