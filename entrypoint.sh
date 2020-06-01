@@ -92,9 +92,13 @@ chmod a+x /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 
 # Update php.ini file
 sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/fpm/php.ini
+sed -i "s/memory_limit = -1/memory_limit = 2048M/" /etc/php/7.4/fpm/php.ini
 echo "date.timezone = $TZ" >> /etc/php/7.4/fpm/php.ini
+
 sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/cli/php.ini
+sed -i "s/memory_limit = -1/memory_limit = 2048M/" /etc/php/7.4/apache2/php.ini
 echo "date.timezone = $TZ" >> /etc/php/7.4/cli/php.ini
+
 sed -i "s/max_execution_time = 30/max_execution_time = 120/" /etc/php/7.4/apache2/php.ini
 sed -i "s/memory_limit = 128M/memory_limit = -1/" /etc/php/7.4/apache2/php.ini
 echo "date.timezone = $TZ" >> /etc/php/7.4/apache2/php.ini
