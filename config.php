@@ -19,7 +19,7 @@ define('NNTP_SERVER', 'nnserver');
 define('NNTP_PORT', '563');
 define('NNTP_SSLENABLED', true);
 
-define('CACHEOPT_METHOD', 'none');
+define('CACHEOPT_METHOD', 'memcache');
 define('CACHEOPT_TTLFAST', '120');
 define('CACHEOPT_TTLMEDIUM', '600');
 define('CACHEOPT_TTLSLOW', '1800');
