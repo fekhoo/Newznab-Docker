@@ -1,41 +1,34 @@
 #!/usr/bin/env bash
 
-#Creating needed folders
+#Creating needed folders if needed
 if [ ! -f /var/www/newznab/www/covers/anime ]; then 
 mkdir -p /var/www/newznab/www/covers/anime
-chmod  -R 777 /var/www/newznab/www/covers/anime
+chmod  -R 777 /var/www/newznab/www/covers/anime 
 fi
-
-if [ ! -f /var/www/newznab/www/covers/music ]; then
+if [ ! -f /var/www/newznab/www/covers/music ]; then 
 mkdir -p /var/www/newznab/www/covers/music
-chmod  -R 777 /var/www/newznab/www/covers/music
+chmod  -R 777 /var/www/newznab/www/covers/music 
 fi
-
-if [ ! -f /var/www/newznab/www/covers/tv ]; then
+if [ ! -f /var/www/newznab/www/covers/tv ]; then 
 mkdir -p /var/www/newznab/www/covers/tv
-chmod  -R 777 /var/www/newznab/www/covers/tv
+chmod  -R 777 /var/www/newznab/www/covers/tv 
 fi
-
-if [ ! -f /var/www/newznab/www/covers/audio ]; then
+if [ ! -f /var/www/newznab/www/covers/audio ]; then 
 mkdir -p /var/www/newznab/www/covers/audio
-chmod  -R 777 /var/www/newznab/www/covers/audio
+chmod  -R 777 /var/www/newznab/www/covers/audio 
 fi
- 
-if [ ! -f /var/www/newznab/www/covers/book ]; then
+if [ ! -f /var/www/newznab/www/covers/book ]; then 
 mkdir -p /var/www/newznab/www/covers/book
-chmod  -R 777 /var/www/newznab/www/covers/book
+chmod  -R 777 /var/www/newznab/www/covers/book 
 fi
-
-if [ ! -f /var/www/newznab/www/covers/console ]; then
+if [ ! -f /var/www/newznab/www/covers/console ]; then 
 mkdir -p /var/www/newznab/www/covers/console
-chmod  -R 777 /var/www/newznab/www/covers/console
+chmod  -R 777 /var/www/newznab/www/covers/console 
 fi
-
 if [ ! -f /var/www/newznab/www/covers/movies ]; then
 mkdir -p /var/www/newznab/www/covers/movies
 chmod  -R 777 /var/www/newznab/www/covers/movies
 fi
-
 if [ ! -f /var/www/newznab/www/covers/preview ]; then
 mkdir -p /var/www/newznab/www/covers/preview
 chmod  -R 777 /var/www/newznab/www/covers/preview
@@ -56,33 +49,6 @@ sed -i "s/'nnserver'/'$NNTP_SERVER'/" /var/www/newznab/www/config.php
 sed -i "s/563/$NNTP_PORT/" /var/www/newznab/www/config.php
 sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www/newznab/www/config.php
 
-# Edit config file cash settings
-if [[ "$CACHEOPT_METHOD" ]]; then
-    sed -i "s/'none'/'$CACHEOPT_METHOD'/" /var/www/newznab/www/config.php
-fi
-if [[ "$CACHEOPT_TTLFAST" ]]; then
-    sed -i "s/'120'/'$CACHEOPT_TTLFAST'/" /var/www/newznab/www/config.php
-fi
-if [[ "$CACHEOPT_TTLMEDIUM" ]]; then
-    sed -i "s/'600'/'$CACHEOPT_TTLMEDIUM'/" /var/www/newznab/www/config.php
-fi
-if [[ "$CACHEOPT_TTLSLOW" ]]; then
-    sed -i "s/'1800'/'$CACHEOPT_TTLSLOW'/" /var/www/newznab/www/config.php
-fi
-if [[ "$CACHEOPT_MEMCACHE_SERVER" ]]; then
-    sed -i "s/'127.0.0.1'/'$CACHEOPT_MEMCACHE_SERVER'/" /var/www/newznab/www/config.php
-fi
-if [[ "$CACHEOPT_MEMCACHE_PORT" ]]; then
-    sed -i "s/'11211'/'$CACHEOPT_MEMCACHE_PORT'/" /var/www/newznab/www/config.php
-fi
-
-
-if [[ "$CACHEOPT_REDIS_SERVER" ]]; then
-    sed -i "s/'127.0.0.1'/'$CACHEOPT_REDIS_SERVER'/" /var/www/newznab/www/config.php
-fi
-if [[ "$CACHEOPT_REDIS_PORT" ]]; then
-    sed -i "s/'6379'/'$CACHEOPT_REDIS_PORT'/" /var/www/newznab/www/config.php
-fi
 
 # Getting script ready for newznab Screen
 cp /var/www/newznab/misc/update_scripts/nix_scripts/newznab_screen.sh /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
