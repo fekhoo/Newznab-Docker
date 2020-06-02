@@ -8,7 +8,7 @@ ENV NNUSER="svnplus" \
     
 # Install required packages
 RUN apt-get -y update && \
-    apt-get install -yq ssh screen tmux apache2 php php-fpm \
+    apt-get install -yq ssh screen tmux apache2 php php-fpm php-dev \
     php-pear php-gd php-mysql php-memcache php-curl php-json php-mbstring \
     unrar lame mediainfo subversion ffmpeg memcached nano
     
