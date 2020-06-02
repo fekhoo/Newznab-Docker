@@ -83,4 +83,4 @@ service apache2 restart
 /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh 2>&1 > /dev/stdout
 
 #Keep Docker up!!
-tail -f /var/log/apache2/* /dev/stdout /dev/stderr
+tail -f /dev/stdout /dev/stderr
