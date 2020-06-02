@@ -110,7 +110,8 @@ a2enmod proxy_fcgi setenvif
 a2enconf php7.4-fpm
 a2enmod rewrite
 service php7.4-fpm reload
-/etc/init.d/apache2 restart 
+service memcached start
+service apache2 restart
 
 # Start newznab Service
 /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh 2>&1 > /dev/stdout
