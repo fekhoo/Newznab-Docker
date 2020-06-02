@@ -26,8 +26,8 @@ RUN mkdir /var/www/newznab/ && \
     chmod -R 777 /var/www/newznab/www/covers
     
 #Add Newznab Config File  
-COPY config.php /var/www/newznab/www/config.php
-RUN chmod 777 /var/www/newznab/www/config.php
+#COPY config.php /var/www/newznab/www/config.php
+#RUN chmod 777 /var/www/newznab/www/config.php
 
 # Configure Apache for Newznab site
 COPY newznab.conf /etc/apache2/sites-available/newznab.conf
