@@ -1,7 +1,7 @@
 # Newznab+ Docker
 
 newznab is a usenet indexing application, that makes building a usenet community easy. http://www.newznab.com/
-This is a ubuntu docker image with newznab Plus intended for use on unraid server. This is still a work in progress, but it works fine!
+This is a ubuntu docker image with newznab Plus intended for use on unraid server. This is still a work in progress, but it works fine so far! I  am a car salesman, not a programer and I am not conected with newznab by any means. I did this by reading and studing a lot of docker images right here. If you see something that is wrong or if there is a better way to do something please share it with me I would like to learn the right way of doing things. 
 
 ## Requirements
 - You need a seperate MySQL server.
@@ -34,7 +34,7 @@ docker run --restart=always -d -p 80:80 \
 	-e 'NNTP_SSLENABLED=true' \
 	
 ```
-Go to http://yourip:yourport/install and follow the installation wizard to the end. After completing the installation go to the admin edit site http://yourip:yourport/admin/site-edit.php and set up some paths and config options:
+Go to http://yourip:yourport/install and follow the installation wizard to the end. the docker contains a memcached working so select that for cashing. After completing the installation go to the admin edit site http://yourip:yourport/admin/site-edit.php and set up some paths and config options:
 	
 ```
 - newznabID : <use your owen ID>
@@ -45,7 +45,7 @@ Go to http://yourip:yourport/install and follow the installation wizard to the e
 - check for password : deep
 - delete passworded releases : yes
 ```
-Now activate at least one group to use as a test such as alt.binaries.teevee and you should see some builds start to show up in your server.
+Now activate at least one group to use as a test such as alt.binaries.teevee and you should see some builds start to show up in your server. the screan script starts with the docker and you can see the output in the log files. Please dont ask me for how to deal with the crazy release names because I DONT KNOW, I have been trying to find out for a really long time. So if you know and you like to share that with me thats great :) 
 
 ### Variables
 
