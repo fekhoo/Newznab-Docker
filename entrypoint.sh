@@ -49,7 +49,6 @@ sed -i "s/'nnserver'/'$NNTP_SERVER'/" /var/www/newznab/www/config.php
 sed -i "s/563/$NNTP_PORT/" /var/www/newznab/www/config.php
 sed -i "s/'NNTP_SSLENABLED', true/'NNTP_SSLENABLED', $NNTP_SSLENABLED/" /var/www/newznab/www/config.php
 
-
 # Getting script ready for newznab Screen
 cp /var/www/newznab/misc/update_scripts/nix_scripts/newznab_screen.sh /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
 sed -i "s|/var/www/newznab/htdocs/misc/update_scripts|/var/www/newznab/misc/update_scripts|" /var/www/newznab/misc/update_scripts/nix_scripts/newznab_local.sh
