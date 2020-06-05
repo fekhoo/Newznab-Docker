@@ -32,6 +32,7 @@ docker run --restart=always -d -p 80:80 \
 	-e 'NNTP_SERVER=server.com' \
 	-e 'NNTP_PORT=569' \
 	-e 'NNTP_SSLENABLED=true' \
+	fekhoo/Newznab-Docker
 	
 ```
 Go to http://yourip:yourport/install and follow the installation wizard to the end. the docker contains a memcached working so select that for cashing. After completing the installation go to the admin edit site http://yourip:yourport/admin/site-edit.php and set up some paths and config options:
